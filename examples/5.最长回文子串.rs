@@ -4,7 +4,6 @@
  * [5] 最长回文子串
  */
 
-use std::ops::Index;
 
 // @lc code=start
 impl Solution {
