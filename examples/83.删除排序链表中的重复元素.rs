@@ -37,8 +37,6 @@ impl Solution {
             cur = node.next.as_mut();
         }
         head
-  
     }
 }
 // @lc code=end
-

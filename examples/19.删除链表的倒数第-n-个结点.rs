@@ -23,7 +23,7 @@
 // }
 impl Solution {
     pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
-        let mut dummy = Box::new(ListNode{val:0, next:head});
+        let mut dummy = Box::new(ListNode { val: 0, next: head });
         unsafe {
             let mut fast = &mut dummy as *mut Box<ListNode>;
             let mut slow = &mut dummy as *mut Box<ListNode>;
@@ -41,4 +41,3 @@ impl Solution {
     }
 }
 // @lc code=end
-

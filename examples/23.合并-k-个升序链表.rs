@@ -38,10 +38,10 @@ impl Solution {
     pub fn merge_k_lists(lists: Vec<Option<Box<ListNode>>>) -> Option<Box<ListNode>> {
         let mut head = None;
         let mut curr = &mut head;
-        let mut heap =  BinaryHeap::new();
+        let mut heap = BinaryHeap::new();
         for mut node in lists.into_iter() {
             if let Some(node) = node {
-                heap.push(Reverse(node));                
+                heap.push(Reverse(node));
             }
         }
 
@@ -56,4 +56,3 @@ impl Solution {
     }
 }
 // @lc code=end
-

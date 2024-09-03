@@ -36,9 +36,9 @@ impl Solution {
                         cur1 = &mut cur1.insert(node).next;
                     } else {
                         head = node.next.take();
-                        cur2 = &mut cur2.insert(node).next;       
+                        cur2 = &mut cur2.insert(node).next;
                     }
-                },
+                }
                 None => break,
             }
         }
@@ -47,4 +47,3 @@ impl Solution {
     }
 }
 // @lc code=end
-

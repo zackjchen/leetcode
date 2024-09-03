@@ -4,11 +4,10 @@
  * [76] 最小覆盖子串
  */
 
-
 // @lc code=start
 impl Solution {
     pub fn min_window(s: String, t: String) -> String {
-        let s  = s.chars().collect::<Vec<char>>();
+        let s = s.chars().collect::<Vec<char>>();
         let mut valid = 0;
         let mut len = std::usize::MAX;
         let mut start = 0;
@@ -22,7 +21,7 @@ impl Solution {
         while j < s.len() {
             let c = s[j];
             j += 1;
-            if need.contains_key(&c){
+            if need.contains_key(&c) {
                 *windows.entry(c).or_insert(0) += 1;
                 if windows.get(&c) == need.get(&c) {
                     // TODO
@@ -50,9 +49,8 @@ impl Solution {
         return if len == std::usize::MAX {
             "".to_string()
         } else {
-            s[start..start+len].iter().collect::<String>()
+            s[start..start + len].iter().collect::<String>()
         };
     }
 }
 // @lc code=end
-

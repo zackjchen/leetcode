@@ -24,7 +24,10 @@ use lib::ListNode;
 //   }
 // }
 impl Solution {
-    pub fn merge_two_lists(list1: Option<Box<ListNode>>, list2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    pub fn merge_two_lists(
+        list1: Option<Box<ListNode>>,
+        list2: Option<Box<ListNode>>,
+    ) -> Option<Box<ListNode>> {
         // let (mut l1, mut l2) = (list1, list2);
         // let mut dummy = None;
         // let mut cur = &mut dummy;
@@ -65,9 +68,6 @@ impl Solution {
                 }
             }
         }
-        
     }
-
 }
 // @lc code=end
-

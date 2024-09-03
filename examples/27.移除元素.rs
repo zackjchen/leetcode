@@ -9,7 +9,7 @@ impl Solution {
     pub fn remove_element(nums: &mut Vec<i32>, val: i32) -> i32 {
         let mut p = 0;
         for q in 0..nums.len() {
-            if nums[q] != val{
+            if nums[q] != val {
                 nums.swap(p, q);
                 p += 1;
             }
@@ -18,4 +18,3 @@ impl Solution {
     }
 }
 // @lc code=end
-
