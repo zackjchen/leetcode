@@ -3,46 +3,25 @@ use std::{collections::HashMap, vec};
 
 fn main() {
 
-    let matrix = vec![vec![1,2,3],vec![4,5,6],];
-    let matrix = vec![vec![1]];
-    let res = spiral_order( matrix);
-    println!("res={:?}", res);
+    let mut matrix = vec![vec![1,2,3],vec![4,5,6],vec![7,8,9],];
+    rotate(&mut matrix);
+    println!("res={:?}", matrix);
 }
-
-
-pub fn spiral_order(matrix: Vec<Vec<i32>>) -> Vec<i32> {
-    let mut res = vec![];
-    let mut top = 0;
-    let mut bottom = matrix.len() -1 ;
-    let mut left = 0;
-    let mut right = matrix[0].len() -1;
-
-    while top<= bottom && left <= right  {
-        println!("top={},bottom={},left={},right={}", top,bottom,left,right);
-
-        for i in left..=right {
-            res.push(matrix[top][i]);
+///  
+/// a[j][n-i-1] 应该放 a[i][j] ,用temp暂存 a[j][n-i-1]
+/// a[n-i-1][n-j-1] 应该放 a[j][n-i-1] ,用temp暂存 a[n-i-1][n-j-1]
+/// a[n-j-1][i]应该放 a[n-i-1][n-j-1] ,用temp暂存 a[n-j-1][i]
+/// a[i][j]应该放 a[n-j-1][i] ,用temp暂存 a[i][j]
+pub fn rotate(matrix: &mut Vec<Vec<i32>>) {
+    let n = matrix.len();
+    for i in 0..n/2{
+        for j in 0..(n+1)/2{
+            let temp = matrix[i][j];
+            matrix[i][j] = matrix[n-j-1][i];
+            matrix[n-j-1][i] = matrix[n-i-1][n-j-1];
+            matrix[n-i-1][n-j-1] = matrix[j][n-i-1];
+            matrix[j][n-i-1] = temp;
         }
-        for i in top+1..=bottom {
-            res.push(matrix[i][right]);
-        }
-        if top < bottom && left < right {
-            for i in (left+1..=(right-1)).rev() {
-                res.push(matrix[bottom][i]);
-            }
-            for i in (top+1..=bottom).rev() {
-                res.push(matrix[i][left]);
-            }
-        }
-
-        if top == bottom || left == right {
-            break;
-        }
-        top += 1;
-        bottom -= 1;
-        left += 1;
-        right -= 1;
     }
-
-    res
 }
+
