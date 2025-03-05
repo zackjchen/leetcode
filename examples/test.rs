@@ -1,41 +1,48 @@
-use std::{collections::HashSet, mem::swap};
+use std::{collections::HashMap, vec};
+
 
 fn main() {
-    
-    let nums = vec![-4, -1, -1, 0, 1, 2];
-    let nums = vec![-1,0,1,2,-1,-4,-2,-3,3,0,4]
 
-    ;
-    // let nums = vec![-2,-1,1,2]    ;
-    let res = three_sum( nums);
-    println!("{:?}", res);
+    let matrix = vec![vec![1,2,3],vec![4,5,6],];
+    let matrix = vec![vec![1]];
+    let res = spiral_order( matrix);
+    println!("res={:?}", res);
 }
-pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
-    nums.sort();
-    println!("{:?}", nums);
+
+
+pub fn spiral_order(matrix: Vec<Vec<i32>>) -> Vec<i32> {
     let mut res = vec![];
+    let mut top = 0;
+    let mut bottom = matrix.len() -1 ;
+    let mut left = 0;
+    let mut right = matrix[0].len() -1;
 
-    for first in 0..nums.len() - 1 {
-        let mut third = nums.len() - 1;
+    while top<= bottom && left <= right  {
+        println!("top={},bottom={},left={},right={}", top,bottom,left,right);
 
-        if first != 0 && nums[first] == nums[first - 1] {
-            continue;
+        for i in left..=right {
+            res.push(matrix[top][i]);
         }
-        for second in first + 1..nums.len() { 
-            println!("=>{} {} {}", first, second, third);
-
-            if second != first+1 && nums[second] == nums[second-1] {
-                continue;
+        for i in top+1..=bottom {
+            res.push(matrix[i][right]);
+        }
+        if top < bottom && left < right {
+            for i in (left+1..=(right-1)).rev() {
+                res.push(matrix[bottom][i]);
             }
-            while nums[first] + nums[second] + nums[third] > 0 && third > second {
-                third -= 1;
-            }
-            if nums[first] + nums[second] + nums[third] == 0 && third > second{
-                println!("{} {} {}", first, second, third);
-                 res.push(vec![nums[first], nums[second], nums[third]]);
+            for i in (top+1..=bottom).rev() {
+                res.push(matrix[i][left]);
             }
         }
-        
+
+        if top == bottom || left == right {
+            break;
+        }
+        top += 1;
+        bottom -= 1;
+        left += 1;
+        right -= 1;
     }
+
     res
 }
