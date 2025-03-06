@@ -10,9 +10,6 @@ impl Solution {
         let mut x = 0;
         let mut y = matrix[0].len() as i32 - 1;
         while x < matrix.len() && y >= 0 && matrix[x][y as usize] != target {
-            if y == 0{
-                return  false;
-            }
             if matrix[x][y as usize] > target {
                 y -= 1;
             } else {

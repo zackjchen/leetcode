@@ -13,8 +13,6 @@ impl Solution {
         for e in nums {
             last = e.max(last + e);
             max = max.max(last);
-    
-    
         }
         max
     }
