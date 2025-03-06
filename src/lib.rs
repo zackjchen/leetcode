@@ -12,10 +12,11 @@ impl ListNode {
 
     pub fn from_vec(list: Vec<i32>) -> Option<Box<ListNode>> {
         let mut head = None;
-        let cur = &mut head;
+        let mut cur = &mut head;
         for v in list{
             let node = ListNode::new(v);
-            cur.replace(Box::new(node));
+            *cur = Some(Box::new(node));
+            cur = &mut cur.as_mut().unwrap().next;
         }
         head
     }
