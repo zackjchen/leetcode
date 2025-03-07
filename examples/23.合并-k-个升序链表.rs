@@ -36,21 +36,20 @@ impl PartialOrd for ListNode {
 }
 impl Solution {
     pub fn merge_k_lists(lists: Vec<Option<Box<ListNode>>>) -> Option<Box<ListNode>> {
-        let mut head = None;
-        let mut curr = &mut head;
-        let mut heap = BinaryHeap::new();
-        for mut node in lists.into_iter() {
-            if let Some(node) = node {
-                heap.push(Reverse(node));
+        let mut queue = BinaryHeap::new();
+        let mut head: Option<Box<ListNode>> = None;
+        let mut cur = &mut head;
+        for head in lists {
+            if let Some(node) = head {
+                queue.push(Reverse(node));
             }
         }
-
-        while let Some(mut node) = heap.pop() {
-            let y = node.0.next.take();
-            curr = &mut curr.insert(node.0).next;
-            if y.is_some() {
-                heap.push(Reverse(y.unwrap()));
+        while let Some(mut node) = queue.pop(){
+            if let Some(next) = node.0.next.take(){
+                queue.push(Reverse(next));
             }
+            cur = &mut cur.insert(node.0).next;
+        
         }
         head
     }

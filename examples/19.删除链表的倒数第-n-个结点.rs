@@ -38,6 +38,21 @@ impl Solution {
             (*slow).next = (*slow).next.take().unwrap().next;
         }
         dummy.next
+
+        // rust的独特写法，可以不用找前一个节点，直接删除
+        // unsafe {
+        //     let mut fast = &mut head as *mut Option<Box<ListNode>>;
+        //     let mut slow = &mut head as *mut Option<Box<ListNode>>;
+        //     for _ in 0..n {
+        //         fast = &mut (*fast).as_mut().unwrap().next ;
+        //     }
+        //     while (*fast).is_some() {
+        //         fast = &mut (*fast).as_mut().unwrap().next ;
+        //         slow = &mut (*slow).as_mut().unwrap().next ;
+        //     }
+        //     *slow = (*slow).take().unwrap().next
+        // }
+        // head
     }
 }
 // @lc code=end

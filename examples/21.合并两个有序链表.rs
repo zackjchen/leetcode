@@ -28,31 +28,48 @@ impl Solution {
         list1: Option<Box<ListNode>>,
         list2: Option<Box<ListNode>>,
     ) -> Option<Box<ListNode>> {
-        // let (mut l1, mut l2) = (list1, list2);
-        // let mut dummy = None;
-        // let mut cur = &mut dummy;
+        // let mut head = None;
+        // let mut cur = &mut head;
+        // let mut h1 = list1;
+        // let mut h2 = list2;
         // *cur = loop {
-        //     // 这个match消耗了l1和l2的所有权，得到了n1和n2的可变引用
-        //     match (l1, l2){
+        //     match (h1, h2) {
         //         (Some(mut n1), Some(mut n2)) => {
-        //             // 找到较小的值，将其插入到cur中
-        //             // 之后将l1或l2指向下一个节点，因为拿走了所有权，所以这里是take
-        //             // cur指向下一个节点，每次都是None，没有操作的链表再恢复Option的所有权
-        //             if n1.val < n2.val {
-        //                 l1 = n1.next.take();
-        //                 l2 = Some(n2);
+        //             if n1.val <= n2.val {
+        //                 // 两个链表的所有权都被消耗了，所以这里都需要同时插回去
+        //                 h1 = n1.next.take();
+        //                 h2 = Some(n2);
         //                 cur = &mut cur.insert(n1).next;
-        //             }else{
-        //                 l2 = n2.next.take();
-        //                 l1 = Some(n1);
+        //             } else {
+        //                 h2 = n2.next.take();
+        //                 h1 = Some(n1);
         //                 cur = &mut cur.insert(n2).next;
         //             }
+        //             // 这个match没有变量接受，所以不用返回
         //         },
+        //         // 注意这个break也不是返回值，而是跳出循环，这个loop块只有这一个地方退出，所以这个break就是loop的返回值
         //         (x, y) => break x.or(y),
         //     }
         // };
-        // dummy
+        //// 常规写法
+        // while h1.is_some() && h2.is_some() {
+        //     if h1.as_mut().unwrap().val <= h2.as_mut().unwrap().val {
+        //         *cur = h1.take();
+        //         h1 = cur.as_mut().unwrap().next.take();
+        //     }else {
+        //         *cur = h2.take();
+        //         h2 = cur.as_mut().unwrap().next.take();
+        //     }
+        //     cur = &mut cur.as_mut().unwrap().next;
+        // }
+        // if h1.is_some() {
+        //     *cur = h1;
+        // }
+        // if h2.is_some() {
+        //     *cur = h2;
+        // }
 
+        // 最优雅的写法，递归
         let (l1, l2) = (list1, list2);
         match (l1, l2) {
             (None, None) => None,

@@ -31,3 +31,16 @@ impl ListNode {
         println!("null");
     }
 }
+
+impl PartialOrd for ListNode {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        self.val.partial_cmp(&other.val)
+    }
+}
+
+impl Ord for ListNode {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        other.val.cmp(&self.val)
+    }
+    
+}
