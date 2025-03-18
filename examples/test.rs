@@ -4,17 +4,18 @@ use std::{cmp::Reverse, collections::BinaryHeap};
 use lib::ListNode;
 
 fn main() {
-
-    let list1 = vec![1,4,7];
-    let list2 = vec![2,5,8,10,12];
-    let list3 = vec![4,2,1,3,7,9];
-    let head1 = ListNode::from_vec(list1);
-    let head2 = ListNode::from_vec(list2);
-    let head3 = ListNode::from_vec(list3);
-    // let heads = vec![head1, head2, head3];
-    let res = sort_list(head3);
-    // let res = merge(head1,head2);
-    res.as_ref().unwrap().print_list();
+    let a = vec![0;5];
+    println!("{:?}",a);
+    // let list1 = vec![1,4,7];
+    // let list2 = vec![2,5,8,10,12];
+    // let list3 = vec![4,2,1,3,7,9];
+    // let head1 = ListNode::from_vec(list1);
+    // let head2 = ListNode::from_vec(list2);
+    // let head3 = ListNode::from_vec(list3);
+    // // let heads = vec![head1, head2, head3];
+    // let res = sort_list(head3);
+    // // let res = merge(head1,head2);
+    // res.as_ref().unwrap().print_list();
 }
 
 pub fn sort_list(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
