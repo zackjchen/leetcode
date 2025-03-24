@@ -1,3 +1,5 @@
+use std::{cell::RefCell, rc::Rc};
+
 #[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
     pub val: i32,
@@ -44,3 +46,23 @@ impl Ord for ListNode {
     }
     
 }
+
+
+#[derive(Debug, PartialEq, Eq)]
+pub struct TreeNode<T> {
+    pub val: T,
+    pub left: Option<Rc<RefCell<TreeNode<T>>>>,
+    pub right: Option<Rc<RefCell<TreeNode<T>>>>,
+}
+
+impl <T> TreeNode<T> {
+    #[inline]
+    pub fn new(val: T) -> Self {
+        TreeNode {
+            val,
+            left: None,
+            right: None
+        }
+    }
+}
+
