@@ -1,5 +1,5 @@
 
-use std::{cell::RefCell, rc::Rc};
+use std::{cell::RefCell, collections::VecDeque, rc::Rc};
 
 use lib::TreeNode;
 
@@ -20,28 +20,28 @@ fn main() {
 
 }
 
-pub fn max_depth(root: Option<Rc<RefCell<TreeNode<i32>>>>) -> i32 {
-    let mut queue = std::collections::VecDeque::new();
-
-    if root.is_none() {
-        return 0;
+pub fn invert_tree(root: Option<Rc<RefCell<TreeNode<i32>>>>) -> Option<Rc<RefCell<TreeNode<i32>>>> {
+    let mut stack = VecDeque::new();
+    
+    if let Some(node) = root.clone() {
+        stack.push_back(node);
+    }else {
+        return None;
     }
-    let mut res = 0;
-    queue.push_back(root.unwrap());
-    while !queue.is_empty() {
-        let size = queue.len();
-        for _ in 0..size{
-            if let Some(node) = queue.pop_front(){
-                if let Some(left) = node.borrow().left.clone(){
-                    queue.push_back(left);
-                }
-                if let Some(right) = node.borrow().right.clone(){
-                    queue.push_back(right);
-                }
+    while !stack.is_empty() {
+        if let Some(node) = stack.pop_front(){
+            let mut node_borrow = node.borrow_mut();
+            let t = node_borrow.left.clone();
+            node_borrow.left = node_borrow.right.clone();
+            node_borrow.right = t;
+
+            if let Some(left) = node_borrow.left.clone(){
+                stack.push_back(left);
+            }
+            if let Some(right) = node_borrow.right.clone(){
+                stack.push_back(right);
             }
         }
-        res += 1;
     }
-
-    res
+    root
 }
