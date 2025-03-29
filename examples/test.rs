@@ -20,28 +20,35 @@ fn main() {
 
 }
 
-pub fn invert_tree(root: Option<Rc<RefCell<TreeNode<i32>>>>) -> Option<Rc<RefCell<TreeNode<i32>>>> {
-    let mut stack = VecDeque::new();
-    
-    if let Some(node) = root.clone() {
-        stack.push_back(node);
+pub fn is_symmetric(root: Option<Rc<RefCell<TreeNode<i32>>>>) -> bool {
+    // 这里用stack和队列是一模一样的
+    let mut queue = std::collections::VecDeque::new();
+    if let Some(node) = root {
+        let left = node.borrow().left.clone();
+        let right = node.borrow().right.clone();
+        queue.push_back(left);
+        queue.push_back(right);
     }else {
-        return None;
+        return true;
     }
-    while !stack.is_empty() {
-        if let Some(node) = stack.pop_front(){
-            let mut node_borrow = node.borrow_mut();
-            let t = node_borrow.left.clone();
-            node_borrow.left = node_borrow.right.clone();
-            node_borrow.right = t;
-
-            if let Some(left) = node_borrow.left.clone(){
-                stack.push_back(left);
-            }
-            if let Some(right) = node_borrow.right.clone(){
-                stack.push_back(right);
-            }
+    while !queue.is_empty() {
+        // 保证每次都能取出两个数据，不要这一层Option
+        let left = queue.pop_back().unwrap();
+        let right = queue.pop_back().unwrap();
+        match (left, right) {
+            (None, None) => continue,
+            (None, Some(_)) => return false,
+            (Some(_), None) => return false,
+            (Some(left), Some(right)) => {
+                if left.borrow().val != right.borrow().val {
+                    return false;
+                }
+                queue.push_back(left.borrow().left.clone());
+                queue.push_back(right.borrow().right.clone());
+                queue.push_back(left.borrow().right.clone());
+                queue.push_back(right.borrow().left.clone());
+            }   
         }
     }
-    root
+    true
 }
