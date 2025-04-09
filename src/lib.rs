@@ -49,7 +49,7 @@ impl Ord for ListNode {
 
 
 #[derive(Debug, PartialEq, Eq)]
-pub struct TreeNode<T> {
+pub struct TreeNode<T=i32> {
     pub val: T,
     pub left: Option<Rc<RefCell<TreeNode<T>>>>,
     pub right: Option<Rc<RefCell<TreeNode<T>>>>,
