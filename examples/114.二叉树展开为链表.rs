@@ -34,10 +34,10 @@ impl Solution {
         }
         while let Some(node) = stack.pop_back() {
             if let Some(right) = node.borrow_mut().right.take() {
-                stack.push_back(right.clone());
+                stack.push_back(right);
             }
             if let Some(left) = node.borrow_mut().left.take() {
-                stack.push_back(left.clone());
+                stack.push_back(left);
             }
     
             if !stack.is_empty() {
