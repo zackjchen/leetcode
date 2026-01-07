@@ -10,7 +10,7 @@ impl Solution {
     pub fn solve_n_queens(n: i32) -> Vec<Vec<String>> {
         let mut res = vec![];
         
-        // 棋盘作为temp存储
+        // 棋盘作为temp
         let mut chessboard = vec![vec!['.'; n as usize]; n as usize];
 
         fn backtrace(res: &mut Vec<Vec<String>>, row: usize, chessboard: &mut Vec<Vec<char>>) {
@@ -43,9 +43,7 @@ impl Solution {
 
 
 fn is_valid(col: usize, row: usize, chessboard: &Vec<Vec<char>>) -> bool {
-    
     // 竖直方向有没有皇后
-    let mut i = 0 as usize ;
     while i < row { 
         if chessboard[i][col] == 'Q' { 
             return false; 
